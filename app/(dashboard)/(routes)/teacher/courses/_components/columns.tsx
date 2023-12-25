@@ -3,16 +3,16 @@
 import { Course } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal, Pencil } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
+
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import Link from "next/link";
-import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 export const columns: ColumnDef<Course>[] = [
@@ -44,14 +44,14 @@ export const columns: ColumnDef<Course>[] = [
       );
     },
     cell: ({ row }) => {
-        const price = parseFloat(row.getValue("price") || "0");
-        const formatted = new Intl.NumberFormat("en-US", {
-          style: "currency",
-          currency: "USD"
-        }).format(price);
-  
-        return <div>{formatted}</div>
-      }
+      const price = parseFloat(row.getValue("price") || "0");
+      const formatted = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+      }).format(price);
+
+      return <div>{formatted}</div>;
+    },
   },
   {
     accessorKey: "isPublished",
@@ -92,7 +92,7 @@ export const columns: ColumnDef<Course>[] = [
           <DropdownMenuContent align="end">
             <Link href={`/teacher/courses/${id}`}>
               <DropdownMenuItem>
-                <Pencil className="flex h-4 w-4 mr-2" />
+                <Pencil className="h-4 w-4 mr-2" />
                 Edit
               </DropdownMenuItem>
             </Link>
