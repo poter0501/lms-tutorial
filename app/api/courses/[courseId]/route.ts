@@ -51,7 +51,7 @@ export async function DELETE(
 
     return NextResponse.json(deletedCourse);
   } catch (error) {
-    console.log("[]COURSE_ID_DELETE", error);
+    console.log("[COURSE_ID_DELETE]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
 }
