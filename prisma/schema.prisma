@@ -5,7 +5,8 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 model Course {
@@ -28,6 +29,7 @@ model Course {
   updatedAt DateTime @updatedAt
 
   @@index([categoryId])
+  @@fulltext([title])
 }
 
 model Category {
@@ -73,7 +75,7 @@ model Chapter {
 }
 
 model MuxData {
-  id         String @id @default(uuid())
+  id         String  @id @default(uuid())
   assetId    String
   playbackId String?
 
@@ -111,11 +113,10 @@ model Purchase {
 }
 
 model StripeCustomer {
-  id String @id @default(uuid())
-  userId String @unique
+  id               String @id @default(uuid())
+  userId           String @unique
   stripeCustomerId String @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-
